@@ -1,6 +1,11 @@
-.mx-auto {
-    width: 800px;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.card {
-    margin-top: 10px;
+
+.card-header {
+  font-weight: bold;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
 }
