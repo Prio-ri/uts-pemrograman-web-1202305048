@@ -57,6 +57,18 @@
       <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white">Daftar Komponen</div>
         <div class="card-body">
+
+          <!-- Search Bar -->
+          <form method="GET" class="mb-3">
+            <div class="input-group">
+              <input type="text" name="search" class="form-control" placeholder="Cari komponen..." 
+                     value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>">
+              <button class="btn btn-primary" type="submit">🔍 Cari</button>
+              <a href="index.php" class="btn btn-outline-secondary">Reset</a>
+            </div>
+          </form>
+
+          <!-- Tabel Data -->
           <table class="table table-striped table-hover">
             <thead class="table-dark">
               <tr>
@@ -69,7 +81,17 @@
             </thead>
             <tbody>
               <?php
-              $sql2 = "SELECT * FROM data_komponen ORDER BY id_komponen DESC";
+              // Query dengan pencarian
+              $search = isset($_GET['search']) ? $_GET['search'] : '';
+              if ($search != '') {
+                  $sql2 = "SELECT * FROM data_komponen 
+                           WHERE nama_komponen LIKE '%$search%' 
+                           OR jenis LIKE '%$search%' 
+                           ORDER BY id_komponen DESC";
+              } else {
+                  $sql2 = "SELECT * FROM data_komponen ORDER BY id_komponen DESC";
+              }
+
               $q2   = mysqli_query($koneksi, $sql2);
               $urut = 1;
               while ($r2 = mysqli_fetch_array($q2)) {
